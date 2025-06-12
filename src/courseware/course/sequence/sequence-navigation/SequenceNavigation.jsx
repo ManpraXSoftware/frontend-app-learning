@@ -82,6 +82,7 @@ const SequenceNavigation = ({
         iconBefore={prevArrow}
         as={disabled ? undefined : Link}
         to={disabled ? undefined : previousLink}
+        {...(disabled && { "aria-label": "Previous button is disabled" })}
       >
         {shouldDisplayNotificationTriggerInSequence ? null : intl.formatMessage(messages.previousButton)}
       </Button>
@@ -103,6 +104,7 @@ const SequenceNavigation = ({
         iconAfter={nextArrow}
         as={disabled ? undefined : Link}
         to={disabled ? undefined : nextLink}
+        {...(disabled && { "aria-label": "Next button is disabled" })}
       >
         {shouldDisplayNotificationTriggerInSequence ? null : buttonText}
       </Button>

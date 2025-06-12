@@ -39,6 +39,7 @@ const UnitNavigation = ({
         onClick={onClickPrevious}
         as={disabled ? undefined : Link}
         to={disabled ? undefined : previousLink}
+        {...(disabled && { "aria-label": "Previous button is disabled" })}
       >
         <FontAwesomeIcon icon={prevArrow} className="mr-2" size="sm" />
         {intl.formatMessage(messages.previousButton)}
@@ -59,6 +60,8 @@ const UnitNavigation = ({
         disabled={disabled}
         as={disabled ? undefined : Link}
         to={disabled ? undefined : nextLink}
+        {...(disabled && { "aria-label": "Next button is disabled" })}
+
       >
         <UnitNavigationEffortEstimate sequenceId={sequenceId} unitId={unitId}>
           {buttonText}
