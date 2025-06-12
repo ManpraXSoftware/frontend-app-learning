@@ -34,12 +34,15 @@ const UnitNavigation = ({
     return (
       <Button
         variant="outline-secondary"
-        className="previous-button mr-sm-2 d-flex align-items-center justify-content-center"
-        disabled={disabled}
-        onClick={onClickPrevious}
+        // className="previous-button mr-sm-2 d-flex align-items-center justify-content-center"
+        // disabled={disabled}
+        // onClick={onClickPrevious}
+        className={`previous-button mr-sm-2 d-flex align-items-center justify-content-center ${disabled ? 'disabled-button' : ''}`}
+        onClick={disabled ? undefined : onClickPrevious}
         as={disabled ? undefined : Link}
         to={disabled ? undefined : previousLink}
         {...(disabled && { "aria-label": "Previous button is disabled" })}
+        tabIndex={0}
       >
         <FontAwesomeIcon icon={prevArrow} className="mr-2" size="sm" />
         {intl.formatMessage(messages.previousButton)}
@@ -55,13 +58,15 @@ const UnitNavigation = ({
     return (
       <Button
         variant="outline-primary"
-        className="next-button d-flex align-items-center justify-content-center"
-        onClick={onClickNext}
-        disabled={disabled}
+        // className="next-button d-flex align-items-center justify-content-center"
+        // onClick={onClickNext}
+        // disabled={disabled}
+        className={`next-button d-flex align-items-center justify-content-center ${disabled ? 'disabled-button' : ''}`}
+        onClick={disabled ? undefined : onClickNext}
         as={disabled ? undefined : Link}
         to={disabled ? undefined : nextLink}
         {...(disabled && { "aria-label": "Next button is disabled" })}
-
+        tabIndex={0}
       >
         <UnitNavigationEffortEstimate sequenceId={sequenceId} unitId={unitId}>
           {buttonText}

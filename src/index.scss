@@ -441,6 +441,17 @@
   top: -13px !important;
 }
 
+
+.next-button.disabled-button, .previous-button.disabled-button, .next-btn.disabled-button, .previous-btn.disabled-button  {
+  pointer-events: auto !important; /* Allow focus events */
+  cursor: default !important; /* Indicate disabled state */
+  opacity: 0.65; /* Mimic Bootstrap disabled style */
+  color: #0A3055;
+  background-color: transparent;
+  border-color: #0A3055;
+
+}
+
 // Import component-specific sass files
 @import "courseware/course/celebration/CelebrationModal.scss";
 @import "courseware/course/sidebar/sidebars/notifications/NotificationIcon.scss";

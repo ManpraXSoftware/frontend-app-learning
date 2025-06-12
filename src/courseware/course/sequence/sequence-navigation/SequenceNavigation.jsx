@@ -76,13 +76,16 @@ const SequenceNavigation = ({
     return navigationDisabledPrevSequence || (
       <Button
         variant="link"
-        className="previous-btn"
-        onClick={previousHandler}
-        disabled={disabled}
+        // className="previous-btn"
+        // onClick={previousHandler}
+        // disabled={disabled}
+        className={`previous-btn ${disabled ? 'disabled-button' : ''}`}
+        onClick={disabled ? undefined : previousHandler}
         iconBefore={prevArrow}
         as={disabled ? undefined : Link}
         to={disabled ? undefined : previousLink}
         {...(disabled && { "aria-label": "Previous button is disabled" })}
+        tabIndex={0}
       >
         {shouldDisplayNotificationTriggerInSequence ? null : intl.formatMessage(messages.previousButton)}
       </Button>
@@ -98,13 +101,16 @@ const SequenceNavigation = ({
     return navigationDisabledNextSequence || (
       <Button
         variant="link"
-        className="next-btn"
-        onClick={nextHandler}
-        disabled={disabled}
+        // className="next-btn"
+        // onClick={nextHandler}
+        // disabled={disabled}
+        className={`next-btn ${disabled ? 'disabled-button' : ''}`}
+        onClick={disabled ? undefined : nextHandler}
         iconAfter={nextArrow}
         as={disabled ? undefined : Link}
         to={disabled ? undefined : nextLink}
         {...(disabled && { "aria-label": "Next button is disabled" })}
+        tabIndex={0}
       >
         {shouldDisplayNotificationTriggerInSequence ? null : buttonText}
       </Button>
