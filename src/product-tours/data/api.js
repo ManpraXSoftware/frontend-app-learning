@@ -5,7 +5,7 @@ export async function getTourData(username) {
   const url = `${getConfig().LMS_BASE_URL}/api/user_tours/v1/${username}`;
   try {
     const { data } = await getAuthenticatedHttpClient().get(url);
-    return { toursEnabled: true, ...camelCaseObject(data) };
+    return { toursEnabled: false, ...camelCaseObject(data) };
   } catch (error) {
     const { httpErrorStatus } = error && error.customAttributes;
     /** The API will return a
