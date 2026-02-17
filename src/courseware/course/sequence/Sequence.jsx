@@ -35,12 +35,16 @@ const Sequence = ({
   unitNavigationHandler,
   nextSequenceHandler,
   previousSequenceHandler,
+  showAssmt,
+  useProgramThreshold
 }) => {
   const intl = useIntl();
   const {
     canAccessProctoredExams,
     license,
   } = useModel('coursewareMeta', courseId);
+
+
   const {
     isStaff,
     originalUserIsStaff,
@@ -51,7 +55,10 @@ const Sequence = ({
   const sequenceStatus = useSelector(state => state.courseware.sequenceStatus);
   const sequenceMightBeUnit = useSelector(state => state.courseware.sequenceMightBeUnit);
   const { enableNavigationSidebar: isEnabledOutlineSidebar } = useSelector(getCoursewareOutlineSidebarSettings);
+  
+  console.log("exam detail", canAccessProctoredExams, sequence.isTimeLimited, originalUserIsStaff)
 
+  // console.log("showAssmt in seq", showAssmt, useProgramThreshold)
   const handleNext = () => {
     const nextIndex = sequence.unitIds.indexOf(unitId) + 1;
     const newUnitId = sequence.unitIds[nextIndex];
@@ -188,17 +195,35 @@ const Sequence = ({
               />
             </div>
           )}
+          {/* Manprax */}
+          {!showAssmt ? (
+            <div className="unit-container flex-grow-1 pt-4">
+              <div className="mb-3"
+              aria-label={
+              useProgramThreshold
+                ? "Program Assessment is locked. To unlock it, you need to complete the program first."
+                : "Course Assessment is locked. To unlock it, you need to complete the course first."
+            }
+              >
+                {useProgramThreshold
+                  ? "Program Assessment is locked. To unlock it, you need to complete the program first."
+                  : "Course Assessment is locked. To unlock it, you need to complete the course first."}
+              </div>
+            </div>
+          ) : (
+            <div className="unit-container flex-grow-1 pt-4">
+              <SequenceContent
+                courseId={courseId}
+                gated={gated}
+                sequenceId={sequenceId}
+                unitId={unitId}
+                unitLoadedHandler={handleUnitLoaded}
+              />
+              {unitHasLoaded && renderUnitNavigation(false)}
+            </div>
+          )}
 
-          <div className="unit-container flex-grow-1 pt-4">
-            <SequenceContent
-              courseId={courseId}
-              gated={gated}
-              sequenceId={sequenceId}
-              unitId={unitId}
-              unitLoadedHandler={handleUnitLoaded}
-            />
-            {unitHasLoaded && renderUnitNavigation(false)}
-          </div>
+          
         </div>
         {isNewDiscussionSidebarViewEnabled ? <NewSidebar /> : <Sidebar />}
       </div>

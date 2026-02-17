@@ -31,6 +31,9 @@ const SequenceLink = ({
     showLink,
     title,
     hideFromTOC,
+    // Manprax
+    showAssmt,
+    useProgramThreshold
   } = sequence;
   const {
     userTimezone,
@@ -41,6 +44,7 @@ const SequenceLink = ({
   const coursewareUrl = <Link to={`/course/${courseId}/${id}`}>{title}</Link>;
   const displayTitle = showLink ? coursewareUrl : title;
 
+  // console.log("detail at course home page", title, useProgramThreshold)
   const dueDateMessage = (
     <FormattedMessage
       id="learning.outline.sequence-due-date-set"
@@ -109,7 +113,10 @@ const SequenceLink = ({
             )}
           </div>
           <div className="col-10 p-0 ml-3 text-break">
-            <span className="align-middle">{displayTitle}</span>
+            {/* <span className="align-middle">{displayTitle}</span> */}
+            {/* Manprax */}
+
+            {!showAssmt?(<span className="align-middle">{title}</span>):(<span className="align-middle">{displayTitle}</span>)}
             <span className="sr-only">
               , {intl.formatMessage(complete ? messages.completedAssignment : messages.incompleteAssignment)}
             </span>
@@ -131,6 +138,26 @@ const SequenceLink = ({
             {due ? dueDateMessage : noDueDateMessage}
           </small>
         </div>
+        {/* Manprax */}
+        
+        {!showAssmt && !useProgramThreshold?
+        (<div className="row w-100 m-0 ml-3 pl-3">
+          <small className="text-body pl-2" aria-label="Course Assessment is locked. To unlock it, you need to complete the course first.">
+            Course Assessment is locked. To unlock it, you need to complete the course first.
+          </small>
+        </div>):("")
+        }
+
+        {!showAssmt && useProgramThreshold?
+        (<div className="row w-100 m-0 ml-3 pl-3">
+          <small className="text-body pl-2" aria-label="Program Assessment is locked. To unlock it, you need to complete the program first.">
+            Program Assessment is locked. To unlock it, you need to complete the program first.
+          </small>
+        </div>):("")
+        }
+
+        
+
       </div>
     </li>
   );

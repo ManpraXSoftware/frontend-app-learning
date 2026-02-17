@@ -137,6 +137,7 @@ export function normalizeOutlineBlocks(courseId, blocks) {
           resumeBlock: block.resume_block,
           sequenceIds: block.children || [],
           hideFromTOC: block.hide_from_toc,
+          
         };
         break;
 
@@ -155,6 +156,12 @@ export function normalizeOutlineBlocks(courseId, blocks) {
           title: block.display_name,
           hideFromTOC: block.hide_from_toc,
           navigationDisabled: block.navigation_disabled,
+          // Manprax
+          progressThreshold: block.progress_threshold,
+          showAssmt: block.show_assmt,
+          useProgramThreshold: block.use_program_threshold,
+          programUuid: block.program_uuid,
+          
         };
         break;
 
@@ -379,6 +386,8 @@ export async function getOutlineTabData(courseId) {
   const verifiedMode = camelCaseObject(data.verified_mode);
   const welcomeMessageHtml = data.welcome_message_html || '';
 
+    console.log("API data", data)
+    console.log("API data courseBlocks", courseBlocks)
   return {
     accessExpiration,
     canShowUpgradeSock,

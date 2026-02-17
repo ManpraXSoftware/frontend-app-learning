@@ -18,6 +18,7 @@ import { CelebrationModal, shouldCelebrateOnSectionLoad, WeeklyGoalCelebrationMo
 import CourseBreadcrumbs from './CourseBreadcrumbs';
 import ContentTools from './content-tools';
 import Sequence from './sequence';
+import { Face } from '@openedx/paragon/icons';
 
 const Course = ({
   courseId,
@@ -45,7 +46,7 @@ const Course = ({
     course,
   ].filter(element => element != null).map(element => element.title);
 
-  // Below the tabs, above the breadcrumbs alerts (appearing in the order listed here)
+    // Below the tabs, above the breadcrumbs alerts (appearing in the order listed here)
   const dispatch = useDispatch();
 
   const [firstSectionCelebrationOpen, setFirstSectionCelebrationOpen] = useState(false);
@@ -113,6 +114,10 @@ const Course = ({
         unitNavigationHandler={unitNavigationHandler}
         nextSequenceHandler={nextSequenceHandler}
         previousSequenceHandler={previousSequenceHandler}
+        // Manprax
+        showAssmt={sequence.showAssmt}
+        useProgramThreshold={sequence.useProgramThreshold}
+        
       />
       <CelebrationModal
         courseId={courseId}

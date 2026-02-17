@@ -135,6 +135,11 @@ export function normalizeSequenceMetadata(sequence) {
       showCompletion: sequence.show_completion,
       allowProctoringOptOut: sequence.allow_proctoring_opt_out,
       navigationDisabled: sequence.navigation_disabled,
+      // Manprax
+      progressThreshold: sequence.progress_threshold,
+      showAssmt: sequence.show_assmt,
+      useProgramThreshold: sequence.use_program_threshold,
+      programUuid: sequence.program_uuid,
     },
     units: sequence.items.map(unit => ({
       id: unit.id,
