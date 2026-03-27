@@ -98,23 +98,35 @@ const SequenceNavigation = ({
     const disabled = isLastUnit && !exitActive;
     const nextArrow = isRtl(getLocale()) ? ChevronLeft : ChevronRight;
 
-    return navigationDisabledNextSequence || (
+    // return navigationDisabledNextSequence || (
+    //   <Button
+    //     variant="link"
+    //     className={`next-btn ${disabled ? 'disabled-button' : ''}`}
+    //     onClick={disabled ? undefined : nextHandler}
+    //     iconAfter={nextArrow}
+    //     as={disabled ? undefined : Link}
+    //     to={disabled ? undefined : nextLink}
+    //     {...(disabled && { "aria-label": "Next button is disabled" })}
+    //     tabIndex={0}
+    //   >
+    //     {shouldDisplayNotificationTriggerInSequence ? null : buttonText}
+    //   </Button>
+    // );
+
+    return navigationDisabledNextSequence || !disabled ? (
       <Button
         variant="link"
-        // className="next-btn"
-        // onClick={nextHandler}
-        // disabled={disabled}
-        className={`next-btn ${disabled ? 'disabled-button' : ''}`}
-        onClick={disabled ? undefined : nextHandler}
+        className="next-btn"
+        onClick={nextHandler}
         iconAfter={nextArrow}
-        as={disabled ? undefined : Link}
-        to={disabled ? undefined : nextLink}
-        {...(disabled && { "aria-label": "Next button is disabled" })}
+        as={Link}
+        to={nextLink}
         tabIndex={0}
       >
         {shouldDisplayNotificationTriggerInSequence ? null : buttonText}
       </Button>
-    );
+    ) : null;
+
   };
 
   return sequenceStatus === LOADED && (

@@ -14,6 +14,7 @@ import { GetCourseExitNavigation } from '../../course-exit';
 import UnitNavigationEffortEstimate from './UnitNavigationEffortEstimate';
 import { useSequenceNavigationMetadata } from './hooks';
 import messages from './messages';
+import { getConfig } from '@edx/frontend-platform';
 
 const UnitNavigation = ({
   intl,
@@ -27,6 +28,7 @@ const UnitNavigation = ({
     isFirstUnit, isLastUnit, nextLink, previousLink,
   } = useSequenceNavigationMetadata(sequenceId, unitId);
   const { courseId } = useSelector(state => state.courseware);
+  const learning_base_url = getConfig().LEARNING_BASE_URL;
 
   const renderPreviousButton = () => {
     const disabled = isFirstUnit;
@@ -52,20 +54,28 @@ const UnitNavigation = ({
 
   const renderNextButton = () => {
     const { exitActive, exitText } = GetCourseExitNavigation(courseId, intl);
-    const buttonText = (isLastUnit && exitText) ? exitText : intl.formatMessage(messages.nextButton);
+    // const buttonText = (isLastUnit && exitText) ? exitText : intl.formatMessage(messages.nextButton);
     const disabled = isLastUnit && !exitActive;
+    const buttonText = disabled
+    ? "Course Finished, Go to Progress tab"
+    : (isLastUnit && exitText)
+      ? exitText
+      : intl.formatMessage(messages.nextButton);
+      
     const nextArrow = isRtl(getLocale()) ? faChevronLeft : faChevronRight;
+    const ProgressPageTarget = `/course/${courseId}/progress`;
+  const redirectUrl = `${learning_base_url}${ProgressPageTarget}`;
     return (
       <Button
         variant="outline-primary"
-        // className="next-button d-flex align-items-center justify-content-center"
-        // onClick={onClickNext}
-        // disabled={disabled}
-        className={`next-button d-flex align-items-center justify-content-center ${disabled ? 'disabled-button' : ''}`}
+        // className={`next-button d-flex align-items-center justify-content-center ${disabled ? 'disabled-button' : ''}`}
+        className={`next-button d-flex align-items-center justify-content-center `}
         onClick={disabled ? undefined : onClickNext}
-        as={disabled ? undefined : Link}
-        to={disabled ? undefined : nextLink}
-        {...(disabled && { "aria-label": "Next button is disabled" })}
+        // as={disabled ? undefined : Link}
+        as={Link}
+        // to={disabled ? undefined : nextLink}
+        to={disabled ? redirectUrl : nextLink}
+        // {...(disabled && { "aria-label": "Next button is disabled" })}
         tabIndex={0}
       >
         <UnitNavigationEffortEstimate sequenceId={sequenceId} unitId={unitId}>

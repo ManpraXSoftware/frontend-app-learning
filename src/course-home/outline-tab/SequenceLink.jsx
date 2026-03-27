@@ -116,7 +116,7 @@ const SequenceLink = ({
             {/* <span className="align-middle">{displayTitle}</span> */}
             {/* Manprax */}
 
-            {!showAssmt?(<span className="align-middle">{title}</span>):(<span className="align-middle">{displayTitle}</span>)}
+            {!showAssmt?(<span className="align-middle" tabindex="0">{title}</span>):(<span className="align-middle">{displayTitle}</span>)}
             <span className="sr-only">
               , {intl.formatMessage(complete ? messages.completedAssignment : messages.incompleteAssignment)}
             </span>
@@ -134,7 +134,7 @@ const SequenceLink = ({
           </div>
         )}
         <div className="row w-100 m-0 ml-3 pl-3">
-          <small className="text-body pl-2">
+          <small className="text-body pl-2" tabindex="0">
             {due ? dueDateMessage : noDueDateMessage}
           </small>
         </div>
@@ -142,7 +142,7 @@ const SequenceLink = ({
         
         {!showAssmt && !useProgramThreshold?
         (<div className="row w-100 m-0 ml-3 pl-3">
-          <small className="text-body pl-2" aria-label="Course Assessment is locked. To unlock it, you need to complete the course first.">
+          <small className="text-body pl-2" tabindex="0" aria-label="Course Assessment is locked. To unlock it, you need to complete the course first.">
             Course Assessment is locked. To unlock it, you need to complete the course first.
           </small>
         </div>):("")
@@ -150,8 +150,8 @@ const SequenceLink = ({
 
         {!showAssmt && useProgramThreshold?
         (<div className="row w-100 m-0 ml-3 pl-3">
-          <small className="text-body pl-2" aria-label="Program Assessment is locked. To unlock it, you need to complete the program first.">
-            Program Assessment is locked. To unlock it, you need to complete the program first.
+          <small className="text-body pl-2" tabindex="0" aria-label="Program Assessment is locked. To unlock it, you need to complete all courses in the program first.">
+            Program Assessment is locked. To unlock it, you need to complete all courses in the program first.
           </small>
         </div>):("")
         }
