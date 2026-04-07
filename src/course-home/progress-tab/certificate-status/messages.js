@@ -58,7 +58,7 @@ const messages = defineMessages({
   },
   viewableButton: {
     id: 'progress.certificateStatus.viewableButton',
-    defaultMessage: 'View my certificate',
+    defaultMessage: 'View Certificate',
     description: 'Button text which view or links to the certifcate',
   },
   notAvailableHeader: {

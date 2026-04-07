@@ -327,7 +327,7 @@
 .unit-navigation {
   display: flex;
   justify-content: center;
-  max-width: 640px;
+  max-width: 640px !important;
   margin: 0 auto;
 
   @media (max-width: -1 + map-get($grid-breakpoints, "sm")) {

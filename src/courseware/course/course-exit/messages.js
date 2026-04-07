@@ -181,7 +181,7 @@ const messages = defineMessages({
   },
   viewCertificateButton: {
     id: 'courseCelebration.viewCertificateButton',
-    defaultMessage: 'View my certificate',
+    defaultMessage: 'View Certificate',
     description: 'Button to view the course certificate',
   },
   viewCourseScheduleButton: {
