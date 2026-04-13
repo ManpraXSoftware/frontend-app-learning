@@ -70,8 +70,11 @@ const SubsectionTitleCell = ({ intl, subsection }) => {
               href={url}
               className="muted-link small"
               onClick={logSubsectionClicked}
-              tabIndex={gradesFeatureIsFullyLocked ? '-1' : '0'}
-              aria-labelledby={`detailedGradesBlockedIcon${subsection.blockKey}`}
+              // Manprax 
+              // tabIndex={gradesFeatureIsFullyLocked ? '-1' : '0'}
+              // aria-labelledby={`detailedGradesBlockedIcon${subsection.blockKey}`}
+              aria-hidden="true"
+              tabindex="-1"
             >
               {displayName}
             </a>
