@@ -47,7 +47,9 @@ const SubsectionTitleCell = ({ intl, subsection }) => {
       <Row className="w-100 m-0">
         <Collapsible.Trigger
           className="mr-1 position-absolute"
-          aria-label={intl.formatMessage(messages.problemScoreToggleAltText, { subsectionTitle: displayName })}
+          // Manprax
+          // aria-label={intl.formatMessage(messages.problemScoreToggleAltText, { subsectionTitle: displayName })}
+          aria-label={intl.formatMessage(messages.problemScoreToggleAltText)}
           tabIndex={gradesFeatureIsFullyLocked ? '-1' : '0'}
         >
           <Collapsible.Visible whenClosed><Icon src={ArrowDropDown} /></Collapsible.Visible>
@@ -70,11 +72,8 @@ const SubsectionTitleCell = ({ intl, subsection }) => {
               href={url}
               className="muted-link small"
               onClick={logSubsectionClicked}
-              // Manprax 
-              // tabIndex={gradesFeatureIsFullyLocked ? '-1' : '0'}
-              // aria-labelledby={`detailedGradesBlockedIcon${subsection.blockKey}`}
-              aria-hidden="true"
-              tabindex="-1"
+              tabIndex={gradesFeatureIsFullyLocked ? '-1' : '0'}
+              aria-labelledby={`detailedGradesBlockedIcon${subsection.blockKey}`}
             >
               {displayName}
             </a>

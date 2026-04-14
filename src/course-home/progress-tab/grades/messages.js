@@ -165,7 +165,9 @@ const messages = defineMessages({
   },
   problemScoreToggleAltText: {
     id: 'progress.detailedGrades.problemScore.toggleButton',
-    defaultMessage: 'Toggle individual problem scores for {subsectionTitle}',
+    // Manprax
+    // defaultMessage: 'Toggle individual problem scores for {subsectionTitle}',
+    defaultMessage: 'Toggle individual problem scores',
     description: 'Alt text for button which switches detailed view per module',
   },
   sectionGradeOverridden: {
