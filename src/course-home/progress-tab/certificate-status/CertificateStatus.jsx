@@ -37,11 +37,14 @@ const CertificateStatus = ({ intl }) => {
     userHasPassingGrade,
     verificationData,
     verifiedMode,
+    // Manprax
+    programCertificateData
   } = useModel('progress', courseId);
   const {
     certificateAvailableDate,
   } = certificateData || {};
 
+  
   const mode = getCourseExitMode(
     certificateData,
     hasScheduledContent,
@@ -78,6 +81,36 @@ const CertificateStatus = ({ intl }) => {
   let certAvailabilityDate;
 
   let gradeEventName = 'not_passing';
+
+  // Manprax 
+  const certificateUrl = programCertificateData?.certificateUrl;
+  // console.log("programCertificateData",programCertificateData, certificateUrl)
+
+  let programCertBody;
+  let programCertButton;
+  let programCertLink;
+  let programCertTitle;
+  if (programCertificateData !== undefined) {
+
+    if (programCertificateData === null) {
+    }
+
+    else if (certificateUrl === null) {
+      //  User not eligible yet
+      // programCertBody = "Complete the full program to earn your program certificate.";
+      programCertBody = "In order to qualify for a certificate, you must have a passing grade.";
+      programCertTitle = "Program certificate status"
+    }
+
+    else if (certificateUrl) {
+      //  Certificate available
+      programCertBody = "Showcase your accomplishment on LinkedIn or your resumé today.You can download your certificate now and access it any time from here.";
+      programCertLink = certificateUrl;
+      programCertButton = "View Program Certificate";
+      programCertTitle = "Your program certificate is available!"
+    }
+  }
+
   if (userHasPassingGrade) {
     gradeEventName = Object.entries(gradeRange).length > 1 ? 'passing_grades' : 'passing';
   }
@@ -133,12 +166,16 @@ const CertificateStatus = ({ intl }) => {
         body = (
           <FormattedMessage
             id="progress.certificateStatus.downloadableBody"
+            // Manprax
+            // defaultMessage="
+            //   Showcase your accomplishment on LinkedIn or your resumé today.
+            //   You can download your certificate now and access it any time from your
+            //   {dashboardLink} and {profileLink}."
+            // description="Recommending an action for learner when course certificate is available"
+            // values={{ dashboardLink, profileLink }}
             defaultMessage="
               Showcase your accomplishment on LinkedIn or your resumé today.
-              You can download your certificate now and access it any time from your
-              {dashboardLink} and {profileLink}."
-            description="Recommending an action for learner when course certificate is available"
-            values={{ dashboardLink, profileLink }}
+              You can download your certificate now and access it any time from here."
           />
         );
         if (certWebViewUrl) {
@@ -209,9 +246,11 @@ const CertificateStatus = ({ intl }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (!certCase) {
-    return null;
-  }
+  // if (!certCase) {
+  //   return null;
+  // }
+  // Manprax 
+  const showCourseCertificate = !!certCase;
 
   const header = intl.formatMessage(messages[`${certCase}Header`]);
 
@@ -233,30 +272,60 @@ const CertificateStatus = ({ intl }) => {
     }
   };
 
+ 
+  
   return (
-    <section data-testid="certificate-status-component" className="text-dark-700 mb-4">
-      <Card className="bg-light-200 raised-card">
-        <Card.Header title={header} />
-        <Card.Section className="small text-gray-700">
-          {body}
-        </Card.Section>
-        <Card.Footer>
-          {buttonText && (buttonLocation || buttonAction) && (
-            <Button
-              variant="outline-brand"
-              onClick={() => {
-                logCertificateStatusButtonClicked(certStatus);
-                if (buttonAction) { buttonAction(); }
-              }}
-              href={buttonLocation}
-              block
-            >
-              {buttonText}
-            </Button>
-          )}
-        </Card.Footer>
-      </Card>
-    </section>
+    <>
+    {showCourseCertificate && (
+      <section data-testid="certificate-status-component" className="text-dark-700 mb-4">
+        <Card className="bg-light-200 raised-card">
+          <Card.Header title={header} />
+          <Card.Section className="small text-gray-700">
+            {body}
+          </Card.Section>
+          <Card.Footer>
+            {buttonText && (buttonLocation || buttonAction) && (
+              <Button
+                variant="outline-brand"
+                onClick={() => {
+                  logCertificateStatusButtonClicked(certStatus);
+                  if (buttonAction) { buttonAction(); }
+                }}
+                href={buttonLocation}
+                block
+              >
+                {buttonText}
+              </Button>
+            )}
+          </Card.Footer>
+        </Card>
+      </section>
+    )}
+    {/* // Manprax  */}
+
+    {programCertificateData !== null && programCertificateData !== undefined && (
+      <section className="text-dark-700 mb-4">
+        <Card className="bg-light-200 raised-card">
+          <Card.Header title={programCertTitle} />
+          <Card.Section className="small text-gray-700">
+            {programCertBody}
+          </Card.Section>
+          <Card.Footer>
+            {programCertLink && (
+              <Button
+                variant="outline-brand"
+                href={programCertLink}
+                block
+              >
+                {programCertButton}
+              </Button>
+            )}
+          </Card.Footer>
+        </Card>
+      </section>
+    )}
+      </>
+
   );
 };
 

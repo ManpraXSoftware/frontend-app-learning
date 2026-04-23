@@ -3,7 +3,7 @@ import { defineMessages } from '@edx/frontend-platform/i18n';
 const messages = defineMessages({
   notPassingHeader: {
     id: 'progress.certificateStatus.notPassingHeader',
-    defaultMessage: 'Certificate status',
+    defaultMessage: 'Course certificate status',
     description: 'Header text when learner certifcate status is not passing',
   },
   notPassingBody: {
@@ -53,12 +53,12 @@ const messages = defineMessages({
   },
   downloadableHeader: {
     id: 'progress.certificateStatus.downloadableHeader',
-    defaultMessage: 'Your certificate is available!',
+    defaultMessage: 'Your course certificate is available!',
     description: 'Header text when the certifcate is available',
   },
   viewableButton: {
     id: 'progress.certificateStatus.viewableButton',
-    defaultMessage: 'View Certificate',
+    defaultMessage: 'View Course Certificate',
     description: 'Button text which view or links to the certifcate',
   },
   notAvailableHeader: {

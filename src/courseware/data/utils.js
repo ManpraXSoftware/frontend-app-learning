@@ -104,6 +104,9 @@ export function normalizeMetadata(metadata) {
     userNeedsIntegritySignature: data.user_needs_integrity_signature,
     canAccessProctoredExams: data.can_access_proctored_exams,
     learningAssistantEnabled: data.learning_assistant_enabled,
+    // Manprax
+    programCertificateData: camelCaseObject(data.program_certificate_data),
+
   };
 }
 
