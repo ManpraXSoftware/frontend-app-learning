@@ -36,9 +36,9 @@ const DetailedGradesTable = ({ intl }) => {
       const detailedGradesData = subsectionScores.map((subsection) => ({
         subsectionTitle: <SubsectionTitleCell subsection={subsection} />,
         // Manprax 
-        score: <span className={subsection.learnerHasAccess ? '' : 'greyed-out'}
+        score: <div className={subsection.learnerHasAccess ? '' : 'greyed-out'}
         aria-label={`score ${subsection.numPointsEarned} out of ${subsection.numPointsPossible}`}
-        >{subsection.numPointsEarned}{isLocaleRtl ? '\\' : '/'}{subsection.numPointsPossible}</span>,
+        >{subsection.numPointsEarned}{isLocaleRtl ? '\\' : '/'}{subsection.numPointsPossible}</div>,
       }));
 
       return (
