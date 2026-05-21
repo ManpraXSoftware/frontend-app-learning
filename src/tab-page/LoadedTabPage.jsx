@@ -5,6 +5,8 @@ import { Helmet } from 'react-helmet';
 import { getConfig } from '@edx/frontend-platform';
 import { useToggle } from '@openedx/paragon';
 
+import usePageAnnouncement from './usePageAnnouncement';
+
 import { CourseTabsNavigation } from '../course-tabs';
 import { useModel } from '../generic/model-store';
 import { AlertList } from '../generic/user-messages';
@@ -37,6 +39,10 @@ const LoadedTabPage = ({
   const enrollmentAlert = useEnrollmentAlert(courseId);
 
   const activeTab = tabs.filter(tab => tab.slug === activeTabSlug)[0];
+
+  usePageAnnouncement(
+    title && activeTab ? `${title} ${activeTab.title.toLowerCase()} page opened` : null,
+  );
 
   const streakLengthToCelebrate = celebrations && celebrations.streakLengthToCelebrate;
   const streakDiscountCouponEnabled = celebrations && celebrations.streakDiscountEnabled && verifiedMode;

@@ -7,6 +7,7 @@ import { breakpoints, useWindowSize } from '@openedx/paragon';
 
 import { AlertList } from '@src/generic/user-messages';
 import { useModel } from '@src/generic/model-store';
+import usePageAnnouncement from '@src/tab-page/usePageAnnouncement';
 import { getCoursewareOutlineSidebarSettings } from '../data/selectors';
 import { Trigger as CourseOutlineTrigger } from './sidebar/sidebars/course-outline';
 import Chat from './chat/Chat';
@@ -46,7 +47,12 @@ const Course = ({
     course,
   ].filter(element => element != null).map(element => element.title);
 
-    // Below the tabs, above the breadcrumbs alerts (appearing in the order listed here)
+  usePageAnnouncement(
+    course ? `${course.title} unit page opened` : null,
+    sequenceId,
+  );
+
+  // Below the tabs, above the breadcrumbs alerts (appearing in the order listed here)
   const dispatch = useDispatch();
 
   const [firstSectionCelebrationOpen, setFirstSectionCelebrationOpen] = useState(false);
