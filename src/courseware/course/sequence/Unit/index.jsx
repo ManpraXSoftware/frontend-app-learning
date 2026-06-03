@@ -1,12 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-
 import { AppContext } from '@edx/frontend-platform/react';
 import { useIntl } from '@edx/frontend-platform/i18n';
-
 import { useModel } from '@src/generic/model-store';
 import { usePluginsCallback } from '@src/generic/plugin-store';
-
 import BookmarkButton from '../../bookmark/BookmarkButton';
 import messages from '../messages';
 import ContentIFrame from './ContentIFrame';
@@ -15,6 +12,8 @@ import { modelKeys, views } from './constants';
 import { useExamAccess, useShouldDisplayHonorCode } from './hooks';
 import { getIFrameUrl } from './urls';
 import UnitTitleSlot from '../../../../plugin-slots/UnitTitleSlot';
+// Manprax 
+import usePageAnnouncement from '@src/tab-page/usePageAnnouncement';
 
 const Unit = ({
   courseId,
@@ -28,6 +27,8 @@ const Unit = ({
   const shouldDisplayHonorCode = useShouldDisplayHonorCode({ courseId, id });
   const unit = useModel(modelKeys.units, id);
   const isProcessing = unit.bookmarkedUpdateState === 'loading';
+  // Manprax
+  usePageAnnouncement(unit.title ? `${unit.title} unit page opened` : null, id);
   const view = authenticatedUser ? views.student : views.public;
 
   const getUrl = usePluginsCallback('getIFrameUrl', () => getIFrameUrl({

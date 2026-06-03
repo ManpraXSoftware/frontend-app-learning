@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-const ANNOUNCER_ID = 'mx-page-announcer';
+const ANNOUNCER_ID = 'page-announcement-live';
 
 function getAnnouncer() {
   let el = document.getElementById(ANNOUNCER_ID);
