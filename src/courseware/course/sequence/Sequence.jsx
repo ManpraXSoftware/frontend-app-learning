@@ -6,6 +6,7 @@ import {
   sendTrackEvent,
   sendTrackingLogEvent,
 } from '@edx/frontend-platform/analytics';
+import { getConfig } from '@edx/frontend-platform';
 import { useIntl } from '@edx/frontend-platform/i18n';
 import { useSelector } from 'react-redux';
 import SequenceExamWrapper from '@edx/frontend-lib-special-exams';
@@ -205,9 +206,18 @@ const Sequence = ({
                 : "Course Assessment is locked. To unlock it, you need to complete the course first."
             }
               >
-                {useProgramThreshold
-                  ? "Program Assessment is locked. To unlock it, you need to complete all courses in the program first."
-                  : "Course Assessment is locked. To unlock it, you need to complete the course first."}
+                {useProgramThreshold ? (
+                  <>
+                    Program Assessment is locked. To unlock it, you need to complete all courses in the program first.
+                    {' '}
+                    <a
+                      href={`${getConfig().LEARNING_BASE_URL}/course/${courseId}/progress`}
+                      aria-label="View your program progress"
+                    >
+                      View Progress
+                    </a>
+                  </>
+                ) : "Course Assessment is locked. To unlock it, you need to complete the course first."}
               </div>
             </div>
           ) : (

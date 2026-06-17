@@ -13,6 +13,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { Icon } from '@openedx/paragon';
 import { Block } from '@openedx/paragon/icons';
+import { getConfig } from '@edx/frontend-platform';
 import EffortEstimate from '../../shared/effort-estimate';
 import { useModel } from '../../generic/model-store';
 import messages from './messages';
@@ -152,6 +153,13 @@ const SequenceLink = ({
         (<div className="row w-100 m-0 ml-3 pl-3">
           <small className="text-body pl-2" tabindex="0" aria-label="Program Assessment is locked. To unlock it, you need to complete all courses in the program first.">
             Program Assessment is locked. To unlock it, you need to complete all courses in the program first.
+            {' '}
+            <a
+              href={`${getConfig().LEARNING_BASE_URL}/course/${courseId}/progress`}
+              aria-label="View your program progress"
+            >
+              View Progress
+            </a>
           </small>
         </div>):("")
         }
