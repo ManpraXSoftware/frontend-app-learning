@@ -452,6 +452,13 @@
 
 }
 
+.prog-lock-msg {
+    color: #006DAA;
+    text-decoration: none;
+    background-color: transparent;
+    font-size: 16px;
+}
+
 // Import component-specific sass files
 @import "courseware/course/celebration/CelebrationModal.scss";
 @import "courseware/course/sidebar/sidebars/notifications/NotificationIcon.scss";
