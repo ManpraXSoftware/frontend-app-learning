@@ -65,24 +65,30 @@ const ProgressTab = () => {
         </div>
 
         {/* Side panel */}
-        <div className="col-12 col-md-4 p-0 px-md-4">
+        <div className="col-12 col-md-4 p-0 px-md-4 mx-prog-side-panel" id="mx-prog-side-panel">
           {/* Manprax  */}
           {programProgressList.map(({ program_uuid, progress_threshold, courses }) => {
-            const complete = courses
-              .filter(c => c.progress >= progress_threshold)
-              .sort((a, b) => b.progress - a.progress);
-            const incomplete = courses
-              .filter(c => c.progress < progress_threshold)
-              .sort((a, b) => b.progress - a.progress);
-            // Show All: complete (desc) → incomplete (desc) so incomplete sit in the middle visually
-            // Show Only Incomplete: just incomplete sorted desc
+            const isCourseComplete = course => (
+              course.mode === 'certificate'
+                ? !!course.certificate_status
+                : course.progress >= progress_threshold
+            );
+            // Certificate-tracked courses cluster first; progress-tracked courses follow, sorted desc.
+            const sortGroup = group => [
+              ...group.filter(c => c.mode === 'certificate'),
+              ...group.filter(c => c.mode !== 'certificate').sort((a, b) => b.progress - a.progress),
+            ];
+            const complete = sortGroup(courses.filter(isCourseComplete));
+            const incomplete = sortGroup(courses.filter(c => !isCourseComplete(c)));
+            // Show All: complete → incomplete so incomplete sit in the middle visually
+            // Show Only Incomplete: just incomplete
             const visibleCourses = showAllCourses
               ? [...complete, ...incomplete]
               : incomplete;
             return (
-              <div key={program_uuid} className="my-4 p-3 rounded raised-card">
+              <div key={program_uuid} className="mb-4 p-3 rounded mx-raised-card">
                 <div className="d-flex justify-content-between align-items-center mb-1">
-                  <h5 className="mb-0">Program Progress</h5>
+                  <h5 className="prg-progress-title mb-0">Program Progress</h5>
                   <Button
                     variant="outline-primary"
                     className="btn btn-outline-primary btn-sm mx-btn-toggle"
@@ -96,17 +102,22 @@ const ProgressTab = () => {
                 </div>
                 <p className="small text-muted mb-2 mt-2">{`Required completion: ${progress_threshold}%`}</p>
                 <DataTable
-                  data={visibleCourses.map(({ course_id, title, progress }) => ({
+                  data={visibleCourses.map(({
+                    title, progress, mode, certificate_status: certificateStatus,
+                  }) => ({
                     title,
-                    progress: `${progress}%`,
+                    progress: mode === 'certificate' ? (certificateStatus ? 'Y' : 'N') : `${progress}%`,
                   }))}
                   itemCount={visibleCourses.length}
                   columns={[
                     { Header: 'Course', accessor: 'title' },
-                    { Header: 'Progress', accessor: 'progress', headerClassName: 'justify-content-end', cellClassName: 'text-right' },
+                    { Header: 'Progress/Certificate', accessor: 'progress', headerClassName: 'justify-content-end', cellClassName: 'text-right' },
                   ]}
                 >
                   <DataTable.Table />
+                  {visibleCourses.length === 0 && (
+                    <p className="text-center text-muted py-3 mb-0">No course found</p>
+                  )}
                 </DataTable>
               </div>
             );

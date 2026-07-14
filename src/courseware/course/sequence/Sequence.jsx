@@ -210,12 +210,14 @@ const Sequence = ({
                   <>
                     Program Assessment is locked. To unlock it, you need to complete all courses in the program first.
                     {' '}
-                    <a
-                      href={`${getConfig().LEARNING_BASE_URL}/course/${courseId}/progress`}
+                    <button
+                      type="button"
+                      onClick={() => { window.location.href = `${getConfig().LEARNING_BASE_URL}/course/${courseId}/progress`; }}
                       aria-label="View your program progress"
+                      className="view-progress-btn"
                     >
                       View Progress
-                    </a>
+                    </button>
                   </>
                 ) : "Course Assessment is locked. To unlock it, you need to complete the course first."}
               </div>

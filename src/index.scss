@@ -4,7 +4,9 @@
 @import "~@edx/brand/paragon/overrides";
 
 // @import "~@edx/frontend-component-footer/dist/footer";
-@import "~@edx/frontend-component-header/dist/index";
+// @import "~@edx/frontend-component-header/dist/index";
+@import "./mx_test/mxlearningheader/index";
+
 
 #root {
   display: flex;
@@ -459,8 +461,69 @@
     text-decoration: none;
 }
 
+#mx-prog-side-panel {
+  padding-right: 0 !important;
+}
+
 .mx-btn-toggle:focus.btn-sm::before {
   border: none !important;
+  font-size: 13px;
+  padding: 5px;
+}
+
+.prg-progress-title {
+  font-size: 18px;
+}
+
+
+.view-progress-btn {
+  background-color: #006DAA;
+  color: #fff;
+  border: none;
+  padding: 2px 8px;
+  cursor: pointer;
+  outline: none;
+  box-shadow: none;
+  border-radius: 4px;
+
+  &:hover {
+    background-color: #003c5e;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+}
+
+.mx-raised-card {
+  box-shadow: 0 0 0.125rem rgba(0, 0, 0, 0.2);
+  background-color: #f8f7f6;
+}
+
+#mx-prog-side-panel table thead tr th,
+#mx-prog-side-panel table tr:nth-child(even) {
+  background-color: #fffdf0;
+}
+
+.btn.mx-btn-toggle {
+  background-color: #065683 !important;
+    color: #fff !important;
+    border-color: #065683 !important;
+    box-shadow: none !important;
+
+  &:hover {
+    background-color: #065683 !important;
+    color: #f3c20f !important;
+    border-color: #054e78 !important;
+  }
+
+  /* Visible focus ring for keyboard navigation */
+  &:focus-visible {
+    outline: 2px solid #065683;
+    outline-offset: 3px;
+    box-shadow: none !important;
+  }
 }
 
 // Import component-specific sass files
