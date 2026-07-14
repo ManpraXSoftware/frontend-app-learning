@@ -4,9 +4,7 @@
 @import "~@edx/brand/paragon/overrides";
 
 // @import "~@edx/frontend-component-footer/dist/footer";
-// @import "~@edx/frontend-component-header/dist/index";
-@import "./mx_test/mxlearningheader/index";
-
+@import "~@edx/frontend-component-header/dist/index";
 
 #root {
   display: flex;
@@ -461,6 +459,7 @@
     text-decoration: none;
 }
 
+
 #mx-prog-side-panel {
   padding-right: 0 !important;
 }
@@ -517,6 +516,7 @@
     color: #f3c20f !important;
     border-color: #054e78 !important;
   }
+
 
   /* Visible focus ring for keyboard navigation */
   &:focus-visible {
