@@ -101,24 +101,26 @@ const ProgressTab = () => {
                   </Button>
                 </div>
                 <p className="small text-muted mb-2 mt-2">{`Required completion: ${progress_threshold}%`}</p>
-                <DataTable
-                  data={visibleCourses.map(({
-                    title, progress, mode, certificate_status: certificateStatus,
-                  }) => ({
-                    title,
-                    progress: mode === 'certificate' ? (certificateStatus ? 'Y' : 'N') : `${progress}%`,
-                  }))}
-                  itemCount={visibleCourses.length}
-                  columns={[
-                    { Header: 'Course', accessor: 'title' },
-                    { Header: 'Progress/Certificate', accessor: 'progress', headerClassName: 'justify-content-end', cellClassName: 'text-right' },
-                  ]}
-                >
-                  <DataTable.Table />
-                  {visibleCourses.length === 0 && (
-                    <p className="text-center text-muted py-3 mb-0">No course found</p>
-                  )}
-                </DataTable>
+                <div className="mx-program-progress-scroll" tabIndex="0">
+                  <DataTable
+                    data={visibleCourses.map(({
+                      title, progress, mode, certificate_status: certificateStatus,
+                    }) => ({
+                      title,
+                      progress: mode === 'certificate' ? (certificateStatus ? 'Y' : 'N') : `${progress}%`,
+                    }))}
+                    itemCount={visibleCourses.length}
+                    columns={[
+                      { Header: 'Course', accessor: 'title' },
+                      { Header: 'Progress/Certificate', accessor: 'progress', headerClassName: 'justify-content-end', cellClassName: 'text-right' },
+                    ]}
+                  >
+                    <DataTable.Table />
+                    {visibleCourses.length === 0 && (
+                      <p className="text-center text-muted py-3 mb-0">No course found</p>
+                    )}
+                  </DataTable>
+                </div>
               </div>
             );
           })}

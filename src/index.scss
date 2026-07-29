@@ -484,6 +484,8 @@
   outline: none;
   box-shadow: none;
   border-radius: 4px;
+  right: 0;
+  position: absolute;
 
   &:hover {
     background-color: #003c5e;
@@ -505,6 +507,23 @@
   background-color: #fffdf0;
 }
 
+.mx-program-progress-scroll {
+  max-height: 320px;
+  overflow-y: auto;
+
+  thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+
+  /* Visible focus ring so keyboard users can tell the scrollable region is focused */
+  &:focus-visible {
+    outline: 2px solid #065683;
+    outline-offset: -2px;
+  }
+}
+
 .btn.mx-btn-toggle {
   background-color: #065683 !important;
     color: #fff !important;
@@ -516,6 +535,7 @@
     color: #f3c20f !important;
     border-color: #054e78 !important;
   }
+
 
 
   /* Visible focus ring for keyboard navigation */
