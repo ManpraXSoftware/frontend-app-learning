@@ -459,7 +459,6 @@
     text-decoration: none;
 }
 
-
 #mx-prog-side-panel {
   padding-right: 0 !important;
 }
@@ -504,6 +503,14 @@
 #mx-prog-side-panel table thead tr th,
 #mx-prog-side-panel table tr:nth-child(even) {
   background-color: #fffdf0;
+}
+
+.mx-focusable-text {
+  /* Visible focus ring so keyboard users can tell this text is focused */
+  &:focus-visible {
+    outline: 2px solid #065683;
+    outline-offset: 2px;
+  }
 }
 
 .mx-program-progress-scroll {

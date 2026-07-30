@@ -143,7 +143,7 @@ const SequenceLink = ({
         
         {!showAssmt && !useProgramThreshold?
         (<div className="row w-100 m-0 ml-3 pl-3">
-          <small className="text-body pl-2" tabindex="0" aria-label="Course Assessment is locked. To unlock it, you need to complete the course first.">
+          <small className="text-body pl-2" tabindex="0">
             Course Assessment is locked. To unlock it, you need to complete the course first.
           </small>
         </div>):("")
@@ -151,7 +151,7 @@ const SequenceLink = ({
 
         {!showAssmt && useProgramThreshold?
         (<div className="row w-100 m-0 ml-3 pl-3">
-          <small className="text-body pl-2 prog-lock-msg" tabindex="0" aria-label="Program Assessment is locked. To unlock it, you need to complete all courses in the program first.">
+          <small className="text-body pl-2 prog-lock-msg" tabindex="0">
             Program Assessment is locked. To unlock it, you need to complete all courses in the program first.
             {' '}
             <button

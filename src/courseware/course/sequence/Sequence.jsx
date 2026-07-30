@@ -199,13 +199,7 @@ const Sequence = ({
           {/* Manprax */}
           {!showAssmt ? (
             <div className="unit-container flex-grow-1 pt-4">
-              <div className="mb-3" tabindex="0"
-              aria-label={
-              useProgramThreshold
-                ? "Program Assessment is locked. To unlock it, you need to complete all courses in the program first."
-                : "Course Assessment is locked. To unlock it, you need to complete the course first."
-            }
-              >
+              <div className="mb-3" tabindex="0">
                 {useProgramThreshold ? (
                   <>
                     Program Assessment is locked. To unlock it, you need to complete all courses in the program first.

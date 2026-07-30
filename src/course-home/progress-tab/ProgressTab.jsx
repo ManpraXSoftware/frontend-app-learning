@@ -88,20 +88,23 @@ const ProgressTab = () => {
             return (
               <div key={program_uuid} className="mb-4 p-3 rounded mx-raised-card">
                 <div className="d-flex justify-content-between align-items-center mb-1">
-                  <h5 className="prg-progress-title mb-0">Program Progress</h5>
+                  <h5 className="prg-progress-title mb-0 mx-focusable-text" tabIndex="0">
+                    Program Progress
+                  </h5>
                   <Button
                     variant="outline-primary"
                     className="btn btn-outline-primary btn-sm mx-btn-toggle"
                     size="sm"
                     onClick={() => setShowAllCourses(prev => !prev)}
-                    aria-pressed={showAllCourses}
                     aria-label={showAllCourses ? 'Show only incomplete courses' : 'Show all courses'}
                   >
                     {showAllCourses ? 'Show Only Incomplete' : 'Show All'}
                   </Button>
                 </div>
-                <p className="small text-muted mb-2 mt-2">{`Required completion: ${progress_threshold}%`}</p>
-                <div className="mx-program-progress-scroll" tabIndex="0">
+                <p className="small text-muted mb-2 mt-2 mx-focusable-text" tabIndex="0">
+                  {`Required completion: ${progress_threshold}%`}
+                </p>
+                <div className="mx-program-progress-scroll">
                   <DataTable
                     data={visibleCourses.map(({
                       title, progress, mode, certificate_status: certificateStatus,
@@ -117,7 +120,7 @@ const ProgressTab = () => {
                   >
                     <DataTable.Table />
                     {visibleCourses.length === 0 && (
-                      <p className="text-center text-muted py-3 mb-0">No course found</p>
+                      <p className="text-center py-3 mb-0">No course found</p>
                     )}
                   </DataTable>
                 </div>
