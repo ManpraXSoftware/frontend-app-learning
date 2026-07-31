@@ -59,7 +59,7 @@ const CourseGradeFooter = ({ intl, passingGrade }) => {
       </div>
       <div className="col-11 pl-2 px-0">
         {!wideScreen && (
-          <span className="h5 align-bottom">
+          <span className="h5 align-bottom" tabIndex="0">
             {footerText}
             {hasLetterGrades && (
               <span style={{ whiteSpace: 'nowrap' }}>
@@ -70,7 +70,7 @@ const CourseGradeFooter = ({ intl, passingGrade }) => {
           </span>
         )}
         {wideScreen && (
-          <span className="h4 m-0 align-bottom">
+          <span className="h4 m-0 align-bottom" tabIndex="0">
             {footerText}
             {hasLetterGrades && (
               <span style={{ whiteSpace: 'nowrap' }}>

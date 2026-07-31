@@ -35,11 +35,11 @@ const CourseGrade = ({ intl }) => {
       <div className={applyLockedOverlay} aria-hidden={gradesFeatureIsFullyLocked}>
         <div className="row w-100 m-0 p-4">
           <div className="col-12 col-sm-6 p-0 pr-sm-5.5">
-            <h2>{creditCourseRequirements
+            <h2 tabIndex="0">{creditCourseRequirements
               ? intl.formatMessage(messages.gradesAndCredit)
               : intl.formatMessage(messages.grades)}
             </h2>
-            <p className="small">
+            <p className="small" tabIndex="0">
               {intl.formatMessage(messages.courseGradeBody)}
             </p>
           </div>

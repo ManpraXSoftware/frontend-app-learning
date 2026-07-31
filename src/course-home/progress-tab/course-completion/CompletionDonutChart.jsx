@@ -37,7 +37,7 @@ const CompletionDonutChart = ({ intl }) => {
             calculations. The subsequent stroke-dasharray values found in each segment should add up to equal 100
             in order to wrap around the circle once. */}
         <circle className="donut-hole" fill="#fff" cx="21" cy="21" r="15.91549430918954" />
-        <g className="donut-chart-text">
+        <g className="donut-chart-text" tabIndex="0" aria-label={`${completePercentage} % completed`}>
           <text x="50%" y="50%" className="donut-chart-number">
             {completePercentage}{isLocaleRtl && '\u200f'}%
           </text>

@@ -20,10 +20,13 @@ const ProgressTab = () => {
   } = useSelector(state => state.courseHome);
 
   const {
-    gradesFeatureIsFullyLocked, disableProgressGraph,
+    gradesFeatureIsFullyLocked, disableProgressGraph, certificateData, programCertificateData,
   } = useModel('progress', courseId);
 
   const applyLockedOverlay = gradesFeatureIsFullyLocked ? 'locked-overlay' : '';
+
+  // Manprax: once a certificate has been generated, show the certificate card before Program Progress
+  const hasCertificate = certificateData?.certStatus === 'downloadable' || !!programCertificateData?.certificateUrl;
 
   const [programProgressList, setProgramProgressList] = useState([]);
   const [showAllCourses, setShowAllCourses] = useState(false);
@@ -67,6 +70,7 @@ const ProgressTab = () => {
         {/* Side panel */}
         <div className="col-12 col-md-4 p-0 px-md-4 mx-prog-side-panel" id="mx-prog-side-panel">
           {/* Manprax  */}
+          {wideScreen && hasCertificate && <CertificateStatus />}
           {programProgressList.map(({ program_uuid, progress_threshold, courses }) => {
             const isCourseComplete = course => (
               course.mode === 'certificate'
@@ -127,7 +131,7 @@ const ProgressTab = () => {
               </div>
             );
           })}
-          {wideScreen && <CertificateStatus />}
+          {wideScreen && !hasCertificate && <CertificateStatus />}
           <RelatedLinks />
         </div>
       </div>

@@ -279,9 +279,9 @@ const CertificateStatus = ({ intl }) => {
     {showCourseCertificate && (
       <section data-testid="certificate-status-component" className="text-dark-700 mb-4">
         <Card className="bg-light-200 raised-card">
-          <Card.Header title={header} />
+          <Card.Header title={<span tabIndex="0">{header}</span>} />
           <Card.Section className="small text-gray-700">
-            {body}
+            <p className="mb-0" tabIndex="0">{body}</p>
           </Card.Section>
           <Card.Footer>
             {buttonText && (buttonLocation || buttonAction) && (
@@ -306,9 +306,9 @@ const CertificateStatus = ({ intl }) => {
     {programCertificateData !== null && programCertificateData !== undefined && (
       <section className="text-dark-700 mb-4">
         <Card className="bg-light-200 raised-card">
-          <Card.Header title={programCertTitle} />
+          <Card.Header title={<span tabIndex="0">{programCertTitle}</span>} />
           <Card.Section className="small text-gray-700">
-            {programCertBody}
+            <p className="mb-0" tabIndex="0">{programCertBody}</p>
           </Card.Section>
           <Card.Footer>
             {programCertLink && (
