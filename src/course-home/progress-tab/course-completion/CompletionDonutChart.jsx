@@ -32,12 +32,22 @@ const CompletionDonutChart = ({ intl }) => {
 
   return (
     <>
-      <svg role="img" width="50%" height="100%" viewBox="0 0 42 42" className="donut" style={{ maxWidth: '178px' }} aria-hidden="true">
+      <svg
+        role="img"
+        width="50%"
+        height="100%"
+        viewBox="0 0 42 42"
+        className="donut"
+        style={{ maxWidth: '178px' }}
+        tabIndex="0"
+        // aria-label={`${intl.formatMessage(messages.percentComplete, { percent: completePercentage })} ${intl.formatMessage(messages.percentIncomplete, { percent: incompletePercentage })}${lockedPercentage > 0 ? ` ${intl.formatMessage(messages.percentLocked, { percent: lockedPercentage })}` : ''}`}
+        aria-label={`${intl.formatMessage(messages.percentComplete, { percent: completePercentage })}`}
+      >
         {/* The radius (or "r" attribute) is based off of a circumference of 100 in order to simplify percentage
             calculations. The subsequent stroke-dasharray values found in each segment should add up to equal 100
             in order to wrap around the circle once. */}
         <circle className="donut-hole" fill="#fff" cx="21" cy="21" r="15.91549430918954" />
-        <g className="donut-chart-text" tabIndex="0" aria-label={`${completePercentage} % completed`}>
+        <g className="donut-chart-text">
           <text x="50%" y="50%" className="donut-chart-number">
             {completePercentage}{isLocaleRtl && '\u200f'}%
           </text>
@@ -49,7 +59,7 @@ const CompletionDonutChart = ({ intl }) => {
         <LockedDonutSegment lockedPercentage={lockedPercentage} />
         <CompleteDonutSegment completePercentage={completePercentage} lockedPercentage={lockedPercentage} />
       </svg>
-      <div className="sr-only">
+      <div className="sr-only" aria-hidden="true">
         {intl.formatMessage(messages.percentComplete, { percent: completePercentage })}
         {intl.formatMessage(messages.percentIncomplete, { percent: incompletePercentage })}
         {lockedPercentage > 0 && (

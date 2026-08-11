@@ -32,7 +32,7 @@ const GradeBar = ({ intl, passingGrade }) => {
 
   return (
     <div className="col-12 col-sm-6 align-self-center p-0">
-      <div className="sr-only">{intl.formatMessage(messages.courseGradeBarAltText, { currentGrade, passingGrade })}</div>
+      <div className="sr-only" tabIndex="0">{intl.formatMessage(messages.courseGradeBarAltText, { currentGrade, passingGrade })}</div>
       <svg width="100%" height="100px" className="grade-bar" aria-hidden="true">
         <g style={{ transform: 'translateY(2.61em)' }}>
           <rect className="grade-bar__base" width="100%" />

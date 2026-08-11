@@ -92,6 +92,7 @@ const GradeSummaryTable = ({ intl, setAllOfSomeAssignmentTypeIsLocked }) => {
 
   return (
     <>
+      <div className="grade-summary-table" tabIndex="0">
       <DataTable
         data={gradeSummaryData}
         itemCount={gradeSummaryData.length}
@@ -128,6 +129,7 @@ const GradeSummaryTable = ({ intl, setAllOfSomeAssignmentTypeIsLocked }) => {
         <DataTable.Table />
         <GradeSummaryTableFooter />
       </DataTable>
+      </div>
 
       {footnotes && (
         <DroppableAssignmentFootnote footnotes={footnotes} />

@@ -108,7 +108,7 @@ const ProgressTab = () => {
                 <p className="small text-muted mb-2 mt-2 mx-focusable-text" tabIndex="0">
                   {`Required completion: ${progress_threshold}%`}
                 </p>
-                <div className="mx-program-progress-scroll">
+                <div className="mx-program-progress-scroll" tabIndex="0">
                   <DataTable
                     data={visibleCourses.map(({
                       title, progress, mode, certificate_status: certificateStatus,
@@ -124,7 +124,7 @@ const ProgressTab = () => {
                   >
                     <DataTable.Table />
                     {visibleCourses.length === 0 && (
-                      <p className="text-center py-3 mb-0">No course found</p>
+                      <p className="text-center py-3 mb-0 mx-dark-black" tabIndex="0">No course found</p>
                     )}
                   </DataTable>
                 </div>

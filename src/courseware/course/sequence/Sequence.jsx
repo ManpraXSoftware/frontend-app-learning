@@ -199,10 +199,12 @@ const Sequence = ({
           {/* Manprax */}
           {!showAssmt ? (
             <div className="unit-container flex-grow-1 pt-4">
-              <div className="mb-3" tabindex="0">
+              <div className="mb-3">
                 {useProgramThreshold ? (
                   <>
-                    Program Assessment is locked. To unlock it, you need to complete all courses in the program first.
+                    <span tabIndex="0">
+                      Program Assessment is locked. To unlock it, you need to complete all courses in the program first.
+                    </span>
                     {' '}
                     <button
                       type="button"
@@ -213,7 +215,7 @@ const Sequence = ({
                       View Progress
                     </button>
                   </>
-                ) : "Course Assessment is locked. To unlock it, you need to complete the course first."}
+                ) : <span tabIndex="0">Course Assessment is locked. To unlock it, you need to complete the course first.</span>}
               </div>
             </div>
           ) : (
