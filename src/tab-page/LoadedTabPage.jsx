@@ -23,6 +23,7 @@ const LoadedTabPage = ({
   courseId,
   metadataModel,
   unitId,
+  bare,
 }) => {
   const {
     celebrations,
@@ -59,7 +60,7 @@ const LoadedTabPage = ({
       <Helmet>
         <title>{`${activeTab ? `${activeTab.title} | ` : ''}${title} | ${getConfig().SITE_NAME}`}</title>
       </Helmet>
-      {originalUserIsStaff && (
+      {!bare && originalUserIsStaff && (
         <InstructorToolbar
           courseId={courseId}
           unitId={unitId}
@@ -84,7 +85,7 @@ const LoadedTabPage = ({
             ...logistrationAlert,
           }}
         />
-        <CourseTabsNavigation tabs={tabs} className="mb-3" activeTabSlug={activeTabSlug} />
+        {!bare && <CourseTabsNavigation tabs={tabs} className="mb-3" activeTabSlug={activeTabSlug} />}
         <div className="container-xl" id="mx-main">
           {children}
         </div>
@@ -99,12 +100,14 @@ LoadedTabPage.propTypes = {
   courseId: PropTypes.string.isRequired,
   metadataModel: PropTypes.string,
   unitId: PropTypes.string,
+  bare: PropTypes.bool,
 };
 
 LoadedTabPage.defaultProps = {
   children: null,
   metadataModel: 'courseHomeMeta',
   unitId: null,
+  bare: false,
 };
 
 export default LoadedTabPage;

@@ -5,11 +5,13 @@ import { getAuthenticatedUser } from '@edx/frontend-platform/auth';
 import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
 import { Button } from '@openedx/paragon';
 
+import PropTypes from 'prop-types';
+
 import { useModel } from '../../generic/model-store';
 
 import messages from './messages';
 
-const ProgressHeader = ({ intl }) => {
+const ProgressHeader = ({ intl, bare }) => {
   const {
     courseId,
     targetUserId,
@@ -28,7 +30,7 @@ const ProgressHeader = ({ intl }) => {
   return (
     <div className="row w-100 m-0 mt-3 mb-4 justify-content-between">
       <h1 tabIndex={0}>{pageTitle}</h1>
-      {administrator && studioUrl && (
+      {!bare && administrator && studioUrl && (
       <Button variant="outline-primary" size="sm" className="align-self-center" href={studioUrl}>
         {intl.formatMessage(messages.studioLink)}
       </Button>
@@ -39,6 +41,11 @@ const ProgressHeader = ({ intl }) => {
 
 ProgressHeader.propTypes = {
   intl: intlShape.isRequired,
+  bare: PropTypes.bool,
+};
+
+ProgressHeader.defaultProps = {
+  bare: false,
 };
 
 export default injectIntl(ProgressHeader);

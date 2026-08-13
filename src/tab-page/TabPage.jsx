@@ -17,12 +17,14 @@ import LoadedTabPage from './LoadedTabPage';
 import { setCallToActionToast } from '../course-home/data/slice';
 import LaunchCourseHomeTourButton from '../product-tours/newUserCourseHomeTour/LaunchCourseHomeTourButton';
 
+
 const TabPage = ({ intl, ...props }) => {
   const {
     activeTabSlug,
     courseId,
     courseStatus,
     metadataModel,
+    bare,
   } = props;
   const {
     toastBodyLink,
@@ -64,9 +66,9 @@ const TabPage = ({ intl, ...props }) => {
         </>
       )}
 
-      {/* <LearningHeader courseOrg={org} courseNumber={number} courseTitle={title} /> */}
-      <Header courseOrg={org} courseNumber={number} courseTitle={title} />
-      {/* <Header /> */}
+      {!bare && (
+        <Header courseOrg={org} courseNumber={number} courseTitle={title} />
+      )}
 
       {courseStatus === 'loading' && (
         <PageLoading srMessage={intl.formatMessage(messages.loading)} />
@@ -82,7 +84,7 @@ const TabPage = ({ intl, ...props }) => {
           {intl.formatMessage(messages.failure)}
         </p>
       )}
-      <FooterSlot />
+      {!bare && <FooterSlot />}
     </>
   );
 };
@@ -90,6 +92,7 @@ const TabPage = ({ intl, ...props }) => {
 TabPage.defaultProps = {
   courseId: null,
   unitId: null,
+  bare: false,
 };
 
 TabPage.propTypes = {
@@ -99,6 +102,7 @@ TabPage.propTypes = {
   courseStatus: PropTypes.string.isRequired,
   metadataModel: PropTypes.string.isRequired,
   unitId: PropTypes.string,
+  bare: PropTypes.bool,
 };
 
 export default injectIntl(TabPage);

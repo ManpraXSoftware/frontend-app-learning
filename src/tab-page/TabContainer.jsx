@@ -13,6 +13,7 @@ const TabContainer = (props) => {
     slice,
     tab,
     isProgressTab,
+    bare,
   } = props;
 
   const { courseId: courseIdFromUrl, targetUserId } = useParams();
@@ -41,6 +42,7 @@ const TabContainer = (props) => {
       courseId={courseId}
       courseStatus={courseStatus}
       metadataModel={`${slice}Meta`}
+      bare={bare}
     >
       {courseId && <OuterExamTimer courseId={courseId} />}
       {children}
@@ -54,10 +56,12 @@ TabContainer.propTypes = {
   slice: PropTypes.string.isRequired,
   tab: PropTypes.string.isRequired,
   isProgressTab: PropTypes.bool,
+  bare: PropTypes.bool,
 };
 
 TabContainer.defaultProps = {
   isProgressTab: false,
+  bare: false,
 };
 
 export default TabContainer;

@@ -94,6 +94,22 @@ subscribe(APP_READY, () => {
                   </DecodePageRoute>
                 )}
               />
+              <Route
+                path={DECODE_ROUTES.MOBILE_PROGRESS}
+                element={(
+                  <DecodePageRoute>
+                    <TabContainer
+                      tab="progress"
+                      fetch={fetchProgressTab}
+                      slice="courseHome"
+                      isProgressTab
+                      bare
+                    >
+                      <ProgressTab bare />
+                    </TabContainer>
+                  </DecodePageRoute>
+                )}
+              />
               {DECODE_ROUTES.PROGRESS.map((route) => (
                 <Route
                   key={route}

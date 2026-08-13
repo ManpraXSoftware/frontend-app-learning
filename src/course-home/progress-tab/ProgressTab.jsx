@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { breakpoints, useWindowSize, DataTable, Button } from '@openedx/paragon';
 import { getAuthenticatedHttpClient } from '@edx/frontend-platform/auth';
@@ -14,7 +15,7 @@ import RelatedLinks from './related-links/RelatedLinks';
 
 import { useModel } from '../../generic/model-store';
 
-const ProgressTab = () => {
+const ProgressTab = ({ bare }) => {
   const {
     courseId,
   } = useSelector(state => state.courseHome);
@@ -54,17 +55,19 @@ const ProgressTab = () => {
   const wideScreen = windowWidth >= breakpoints.large.minWidth;
   return (
     <>
-      <ProgressHeader />
+      <ProgressHeader bare={bare} />
       <div className="row w-100 m-0">
         {/* Main body */}
         <div className="col-12 col-md-8 p-0">
           {!disableProgressGraph && <CourseCompletion />}
           {!wideScreen && <CertificateStatus />}
           <CourseGrade />
-          <div className={`grades my-4 p-4 rounded raised-card ${applyLockedOverlay}`} aria-hidden={gradesFeatureIsFullyLocked}>
-            <GradeSummary />
-            <DetailedGrades />
-          </div>
+          {!bare && (
+            <div className={`grades my-4 p-4 rounded raised-card ${applyLockedOverlay}`} aria-hidden={gradesFeatureIsFullyLocked}>
+              <GradeSummary />
+              <DetailedGrades />
+            </div>
+          )}
         </div>
 
         {/* Side panel */}
@@ -132,11 +135,19 @@ const ProgressTab = () => {
             );
           })}
           {wideScreen && !hasCertificate && <CertificateStatus />}
-          <RelatedLinks />
+          {!bare && <RelatedLinks />}
         </div>
       </div>
     </>
   );
+};
+
+ProgressTab.propTypes = {
+  bare: PropTypes.bool,
+};
+
+ProgressTab.defaultProps = {
+  bare: false,
 };
 
 export default ProgressTab;
