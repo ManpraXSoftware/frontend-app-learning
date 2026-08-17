@@ -135,7 +135,7 @@ const SequenceLink = ({
           </div>
         )}
         <div className="row w-100 m-0 ml-3 pl-3">
-          <small className="text-body pl-2" tabindex="0">
+          <small className="text-body pl-2" {...(due ? { tabIndex: '0' } : {})}>
             {due ? dueDateMessage : noDueDateMessage}
           </small>
         </div>

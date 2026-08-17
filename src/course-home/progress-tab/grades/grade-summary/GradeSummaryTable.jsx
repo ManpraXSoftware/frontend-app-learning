@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 
@@ -90,9 +90,16 @@ const GradeSummaryTable = ({ intl, setAllOfSomeAssignmentTypeIsLocked }) => {
 
   const getCell = (locked, value) => <span className={locked ? 'greyed-out' : ''}>{value}</span>;
 
+  const gradeSummaryTableRef = useRef(null);
+
+  useEffect(() => {
+    const dataTableContainer = gradeSummaryTableRef.current?.querySelector('[data-testid="data-table-container"]');
+    dataTableContainer?.setAttribute('tabIndex', '0');
+  });
+
   return (
     <>
-      <div className="grade-summary-table" tabIndex="0">
+      <div className="grade-summary-table" ref={gradeSummaryTableRef}>
       <DataTable
         data={gradeSummaryData}
         itemCount={gradeSummaryData.length}

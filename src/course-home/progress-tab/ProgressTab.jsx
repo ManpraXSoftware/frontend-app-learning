@@ -31,6 +31,7 @@ const ProgressTab = ({ bare }) => {
 
   const [programProgressList, setProgramProgressList] = useState([]);
   const [showAllCourses, setShowAllCourses] = useState(false);
+  const [toggleAnnouncement, setToggleAnnouncement] = useState('');
 
   useEffect(() => {
     if (!courseId) { return; }
@@ -92,6 +93,7 @@ const ProgressTab = ({ bare }) => {
             const visibleCourses = showAllCourses
               ? [...complete, ...incomplete]
               : incomplete;
+            const toggleDescId = `program-progress-toggle-desc-${program_uuid}`;
             return (
               <div key={program_uuid} className="mb-4 p-3 rounded mx-raised-card">
                 <div className="d-flex justify-content-between align-items-center mb-1">
@@ -102,12 +104,23 @@ const ProgressTab = ({ bare }) => {
                     variant="outline-primary"
                     className="btn btn-outline-primary btn-sm mx-btn-toggle"
                     size="sm"
-                    onClick={() => setShowAllCourses(prev => !prev)}
-                    aria-label={showAllCourses ? 'Show only incomplete courses' : 'Show all courses'}
+                    onClick={() => {
+                      const nextShowAllCourses = !showAllCourses;
+                      setShowAllCourses(nextShowAllCourses);
+                      setToggleAnnouncement(nextShowAllCourses ? 'Showing all courses.' : 'Showing only incomplete courses.');
+                    }}
+                    aria-label={showAllCourses ? 'Show Only Incomplete Courses' : 'Show All Courses'}
+                    aria-describedby={toggleDescId}
                   >
                     {showAllCourses ? 'Show Only Incomplete' : 'Show All'}
                   </Button>
                 </div>
+                <div aria-live="polite" className="sr-only">{toggleAnnouncement}</div>
+                <span id={toggleDescId} className="sr-only">
+                  {showAllCourses
+                    ? 'Activating this button will display only incomplete courses. Currently Showing all courses.'
+                    : 'Activating this button will display all courses. Currently, Showing only incomplete courses.'}
+                </span>
                 <p className="small text-muted mb-2 mt-2 mx-focusable-text" tabIndex="0">
                   {`Required completion: ${progress_threshold}%`}
                 </p>
