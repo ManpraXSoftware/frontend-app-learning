@@ -33,6 +33,10 @@ const ProgressTab = ({ bare }) => {
 
   const [programProgressList, setProgramProgressList] = useState([]);
   const [showAllCourses, setShowAllCourses] = useState(false);
+  // Kept separate from showAllCourses (which drives the visible table immediately) so the button's
+  // label/description text only updates right before it regains focus, avoiding a premature
+  // screen-reader announcement of the description mutating on an element that still has focus.
+  const [announcedShowAllCourses, setAnnouncedShowAllCourses] = useState(false);
   const toggleButtonRefs = useRef({});
 
   useEffect(() => {
@@ -108,10 +112,8 @@ const ProgressTab = ({ bare }) => {
                     className="btn btn-outline-primary btn-sm mx-btn-toggle"
                     size="sm"
                     onClick={() => {
-                      // Blur before the state update so the description text changes while nothing
-                      // is focused — otherwise the screen reader notices the still-focused element's
-                      // description mutate and announces it once on its own, then again in full when
-                      // we refocus below, producing a duplicate announcement.
+                      // Blur immediately so the table-filter update below doesn't touch anything
+                      // while the button still has focus.
                       const btn = toggleButtonRefs.current[program_uuid];
                       if (btn) {
                         btn.blur();
@@ -119,17 +121,24 @@ const ProgressTab = ({ bare }) => {
                       const nextShowAllCourses = !showAllCourses;
                       setShowAllCourses(nextShowAllCourses);
                       if (btn) {
-                        setTimeout(() => btn.focus(), 400);
+                        // Update the button's label/description and refocus together, after the
+                        // element has been unfocused for a beat — this produces exactly one full
+                        // screen-reader announcement of the new name + role + description, instead
+                        // of an early partial one followed by a duplicate full one.
+                        setTimeout(() => {
+                          setAnnouncedShowAllCourses(nextShowAllCourses);
+                          btn.focus();
+                        }, 400);
                       }
                     }}
-                    aria-label={showAllCourses ? 'Show Only Incomplete Courses' : 'Show All Courses'}
+                    aria-label={announcedShowAllCourses ? 'Show Only Incomplete Courses' : 'Show All Courses'}
                     aria-describedby={toggleDescId}
                   >
                     {showAllCourses ? 'Show Only Incomplete' : 'Show All'}
                   </Button>
                 </div>
                 <span id={toggleDescId} className="sr-only">
-                  {showAllCourses
+                  {announcedShowAllCourses
                     ? 'Activating this button will display only incomplete courses. Currently Showing all courses.'
                     : 'Activating this button will display all courses. Currently, Showing only incomplete courses.'}
                 </span>
