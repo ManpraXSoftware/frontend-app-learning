@@ -107,7 +107,9 @@ const ProgressTab = ({ bare }) => {
                     onClick={() => {
                       const nextShowAllCourses = !showAllCourses;
                       setShowAllCourses(nextShowAllCourses);
-                      setToggleAnnouncement(nextShowAllCourses ? 'Showing all courses.' : 'Showing only incomplete courses.');
+                      setToggleAnnouncement(nextShowAllCourses
+                        ? 'Showing all courses. Button is now Show Only Incomplete Courses.'
+                        : 'Showing only incomplete courses. Button is now Show All Courses.');
                     }}
                     aria-label={showAllCourses ? 'Show Only Incomplete Courses' : 'Show All Courses'}
                     aria-describedby={toggleDescId}
