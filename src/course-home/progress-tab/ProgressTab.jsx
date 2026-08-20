@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, {
+  useState, useEffect, useRef,
+} from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { breakpoints, useWindowSize, DataTable, Button } from '@openedx/paragon';
@@ -32,6 +34,7 @@ const ProgressTab = ({ bare }) => {
   const [programProgressList, setProgramProgressList] = useState([]);
   const [showAllCourses, setShowAllCourses] = useState(false);
   const [toggleAnnouncement, setToggleAnnouncement] = useState('');
+  const toggleButtonRefs = useRef({});
 
   useEffect(() => {
     if (!courseId) { return; }
@@ -101,15 +104,21 @@ const ProgressTab = ({ bare }) => {
                     Program Progress
                   </h5>
                   <Button
+                    ref={(el) => { toggleButtonRefs.current[program_uuid] = el; }}
                     variant="outline-primary"
                     className="btn btn-outline-primary btn-sm mx-btn-toggle"
                     size="sm"
                     onClick={() => {
                       const nextShowAllCourses = !showAllCourses;
                       setShowAllCourses(nextShowAllCourses);
-                      setToggleAnnouncement(nextShowAllCourses
-                        ? 'Showing all courses. Button is now Show Only Incomplete Courses.'
-                        : 'Showing only incomplete courses. Button is now Show All Courses.');
+                      setToggleAnnouncement(nextShowAllCourses ? 'Showing all courses.' : 'Showing only incomplete courses.');
+                      // Force the screen reader to re-read the button's new accessible name + role,
+                      // since focus staying put means the label change alone won't be re-announced.
+                      const btn = toggleButtonRefs.current[program_uuid];
+                      if (btn) {
+                        btn.blur();
+                        setTimeout(() => btn.focus(), 400);
+                      }
                     }}
                     aria-label={showAllCourses ? 'Show Only Incomplete Courses' : 'Show All Courses'}
                     aria-describedby={toggleDescId}
