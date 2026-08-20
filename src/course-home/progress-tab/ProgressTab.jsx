@@ -108,14 +108,17 @@ const ProgressTab = ({ bare }) => {
                     className="btn btn-outline-primary btn-sm mx-btn-toggle"
                     size="sm"
                     onClick={() => {
-                      const nextShowAllCourses = !showAllCourses;
-                      setShowAllCourses(nextShowAllCourses);
-                      // Force the screen reader to re-read the button's new accessible name + role
-                      // and its aria-describedby text, since focus staying put means the label change
-                      // alone won't be re-announced.
+                      // Blur before the state update so the description text changes while nothing
+                      // is focused — otherwise the screen reader notices the still-focused element's
+                      // description mutate and announces it once on its own, then again in full when
+                      // we refocus below, producing a duplicate announcement.
                       const btn = toggleButtonRefs.current[program_uuid];
                       if (btn) {
                         btn.blur();
+                      }
+                      const nextShowAllCourses = !showAllCourses;
+                      setShowAllCourses(nextShowAllCourses);
+                      if (btn) {
                         setTimeout(() => btn.focus(), 400);
                       }
                     }}
