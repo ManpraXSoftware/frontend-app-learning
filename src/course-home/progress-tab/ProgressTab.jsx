@@ -33,7 +33,6 @@ const ProgressTab = ({ bare }) => {
 
   const [programProgressList, setProgramProgressList] = useState([]);
   const [showAllCourses, setShowAllCourses] = useState(false);
-  const [toggleAnnouncement, setToggleAnnouncement] = useState('');
   const toggleButtonRefs = useRef({});
 
   useEffect(() => {
@@ -111,9 +110,9 @@ const ProgressTab = ({ bare }) => {
                     onClick={() => {
                       const nextShowAllCourses = !showAllCourses;
                       setShowAllCourses(nextShowAllCourses);
-                      setToggleAnnouncement(nextShowAllCourses ? 'Showing all courses.' : 'Showing only incomplete courses.');
-                      // Force the screen reader to re-read the button's new accessible name + role,
-                      // since focus staying put means the label change alone won't be re-announced.
+                      // Force the screen reader to re-read the button's new accessible name + role
+                      // and its aria-describedby text, since focus staying put means the label change
+                      // alone won't be re-announced.
                       const btn = toggleButtonRefs.current[program_uuid];
                       if (btn) {
                         btn.blur();
@@ -126,7 +125,6 @@ const ProgressTab = ({ bare }) => {
                     {showAllCourses ? 'Show Only Incomplete' : 'Show All'}
                   </Button>
                 </div>
-                <div aria-live="polite" className="sr-only">{toggleAnnouncement}</div>
                 <span id={toggleDescId} className="sr-only">
                   {showAllCourses
                     ? 'Activating this button will display only incomplete courses. Currently Showing all courses.'
