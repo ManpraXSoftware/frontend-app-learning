@@ -9,29 +9,6 @@
     <% if (htmlWebpackPlugin.options.OPTIMIZELY_PROJECT_ID) { %>
       <script src="https://www.edx.org/optimizelyjs/<%= htmlWebpackPlugin.options.OPTIMIZELY_PROJECT_ID %>.js"></script>
     <% } %>
-    <!-- /* LTS WAT Code START : DO NOT REMOVE or MODIFY */ -->
-<% if (process.env.NODE_ENV == 'development') { %>
-  <meta http-equiv="Content-Security-Policy" content="
-  font-src 'self' http://local.edly.io  https://subodha.letstalksign.org https://lms.letstalksign.org https://core.atbar.org https://www.googletagmanager.com https://fonts.googleapis.com https://fonts.gstatic.com https://plugins.atbar.org https://www.google-analytics.com https://lts.lb.gcloud.letstalksign.org https://cdn.userway.org; 
-  img-src 'self' http://local.edly.io http://local.edly.io:8000 https://logos.openedx.org https://edx-cdn.org  https://subodha.letstalksign.org https://core.atbar.org https://www.googletagmanager.com https://global.localizecdn.com https://plugins.atbar.org https://www.google-analytics.com https://lts.lb.gcloud.letstalksign.org https://pixabay.com data: blob: https://cdn.userway.org https://files.edx.org; 
-  connect-src 'self' data: blob: http://local.edly.io http://local.edly.io:8000  https://subodha.letstalksign.org https://cdn.jsdelivr.net https://global.localizecdn.com https://core.atbar.org https://www.googletagmanager.com https://plugins.atbar.org https://www.google-analytics.com https://lts.lb.gcloud.letstalksign.org https://pixabay.com https://api.userway.org https://cdn.userway.org; 
-  default-src 'self' http://local.edly.io  https://subodha.letstalksign.org https://lms.letstalksign.org https://core.atbar.org https://www.googletagmanager.com https://plugins.atbar.org https://www.google-analytics.com https://lts.lb.gcloud.letstalksign.org https://cdn.jsdelivr.net https://cdn.userway.org; 
-  frame-src 'self' http://local.edly.io:8000 https://lts.lb.gcloud.letstalksign.org https://cdn.userway.org; 
-  style-src 'self' http://local.edly.io  https://subodha.letstalksign.org https://lms.letstalksign.org https://fonts.googleapis.com https://core.atbar.org https://www.googletagmanager.com https://plugins.atbar.org https://www.google-analytics.com https://lts.lb.gcloud.letstalksign.org https://pixabay.com https://cdn.userway.org 'unsafe-inline'; 
-  script-src 'self' blob: http://local.edly.io https://cdn.userway.org  https://subodha.letstalksign.org https://core.atbar.org https://lms.letstalksign.org https://www.googletagmanager.com https://plugins.atbar.org https://www.google-analytics.com https://lts.lb.gcloud.letstalksign.org https://pixabay.com 'unsafe-inline' 'unsafe-eval' http://local.edly.io https://subodha.letstalksign.org https://core.atbar.org https://subodha.lms.visionempowertrust.org https://www.googletagmanager.com https://plugins.atbar.org https://www.google-analytics.com https://lts.lb.gcloud.letstalksign.org https://cdn.jsdelivr.net https://code.jquery.com https://global.localizecdn.com;"/>
-<% } %>
-<% if (process.env.NODE_ENV == 'mxproduction') { %>
-  <meta http-equiv="Content-Security-Policy" content="
-  font-src 'self' https://subodha-azure-stage.manprax.in https://staging-lms.visionempowertrust.org  https://subodha-lms.visionempowertrust.org  https://subodha.letstalksign.org https://lms.letstalksign.org https://core.atbar.org https://www.googletagmanager.com https://fonts.googleapis.com https://fonts.gstatic.com https://plugins.atbar.org https://www.google-analytics.com https://lts.lb.gcloud.letstalksign.org https://cdn.userway.org; 
-  img-src 'self' https://subodha-azure-stage.manprax.in https://staging-lms.visionempowertrust.org  https://subodha-lms.visionempowertrust.org  https://logos.openedx.org https://cdn.userway.org https://edx-cdn.org  https://subodha.letstalksign.org https://core.atbar.org https://www.googletagmanager.com https://global.localizecdn.com https://plugins.atbar.org https://www.google-analytics.com https://lts.lb.gcloud.letstalksign.org https://pixabay.com data: blob: https://cdn.userway.org https://files.edx.org; 
-  connect-src 'self' data: blob: https://subodha-azure-stage.manprax.in https://staging-lms.visionempowertrust.org  https://subodha-lms.visionempowertrust.org   https://cdn.userway.org https://subodha.letstalksign.org https://cdn.jsdelivr.net https://global.localizecdn.com https://core.atbar.org https://www.googletagmanager.com https://plugins.atbar.org https://www.google-analytics.com https://lts.lb.gcloud.letstalksign.org https://pixabay.com https://api.userway.org; 
-  default-src 'self' https://subodha-azure-stage.manprax.in https://staging-lms.visionempowertrust.org  https://subodha-lms.visionempowertrust.org  https://subodha.letstalksign.org https://lms.letstalksign.org https://core.atbar.org https://www.googletagmanager.com https://plugins.atbar.org https://www.google-analytics.com https://lts.lb.gcloud.letstalksign.org https://cdn.jsdelivr.net https://cdn.userway.org; 
-  frame-src 'self' https://subodha-azure-stage.manprax.in https://staging-lms.visionempowertrust.org  https://subodha-lms.visionempowertrust.org https://lts.lb.gcloud.letstalksign.org https://cdn.userway.org; 
-  style-src 'self' https://subodha-azure-stage.manprax.in https://staging-lms.visionempowertrust.org  https://subodha-lms.visionempowertrust.org  https://subodha.letstalksign.org https://lms.letstalksign.org https://fonts.googleapis.com https://core.atbar.org https://www.googletagmanager.com https://plugins.atbar.org https://www.google-analytics.com https://lts.lb.gcloud.letstalksign.org https://pixabay.com https://cdn.userway.org 'unsafe-inline'; 
-  script-src 'self' blob: https://subodha-azure-stage.manprax.in https://staging-lms.visionempowertrust.org  https://subodha-lms.visionempowertrust.org https://cdn.userway.org  https://subodha.letstalksign.org https://core.atbar.org https://lms.letstalksign.org https://www.googletagmanager.com https://plugins.atbar.org https://www.google-analytics.com https://lts.lb.gcloud.letstalksign.org https://pixabay.com 'unsafe-inline' 'unsafe-eval' https://subodha-azure-stage.manprax.in https://staging-lms.visionempowertrust.org  https://subodha-lms.visionempowertrust.org https://subodha.letstalksign.org https://core.atbar.org https://subodha.lms.visionempowertrust.org https://www.googletagmanager.com https://plugins.atbar.org https://www.google-analytics.com https://lts.lb.gcloud.letstalksign.org https://cdn.jsdelivr.net https://code.jquery.com https://global.localizecdn.com;"/>
-
-  <% } %>
-   <!-- /* LTS WAT Code END : DO NOT REMOVE or MODIFY */ -->
   </head>
   <body>
     <div
@@ -45,37 +22,6 @@
 
 <script>
 
-// if (document.readyState === 'complete') {
-//       alert('DOM and all resources have fully loaded');
-//     } else if (document.readyState === 'interactive') {
-//       alert('DOM fully loaded and parsed, but resources may still be loading');
-
-//     } else {
-//       alert('DOM is still loading');
-//     }
-
-// window.addEventListener('load', function() {
-//   if (document.readyState === 'complete') {
-//     alert('DOM and all resources have fully loaded');
-//   } else if (document.readyState === 'interactive') {
-//     alert('DOM fully loaded and parsed, but resources may still be loading');
-//   } else {
-//     alert('DOM is still loading');
-//   }
-// });
-
-
-
-
-// document.addEventListener('DOMContentLoaded', function() {
-//   if (document.readyState === 'complete') {
-//     alert('DOM and all resources have fully loaded');
-//   } else if (document.readyState === 'interactive') {
-//     alert('DOM fully loaded and parsed, but resources may still be loading');
-//   } else {
-//     alert('DOM is still loading');
-//   }
-// });
 
 </script>
 
